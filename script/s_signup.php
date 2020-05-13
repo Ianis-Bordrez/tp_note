@@ -1,5 +1,4 @@
 <?php 
-
 require_once('main_function.php');
 
 $bdd = mysqlConnect();
@@ -9,9 +8,9 @@ $req1->execute(array('username' => $_POST['userName']));
 $resultat = $req1->fetch();
 
 if ($resultat){
-    echo "Un utilisateur porte déjà  ce nom";
+    echo "Un utilisateur porte d'ej`a  ce nom";
     header("Location: ../signup.php");
-    exit;
+    exit();
 }
 
 $pass_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -28,4 +27,4 @@ $req->execute(array(
     ));
 
 header("Location: ../login.php");
-exit;
+exit();

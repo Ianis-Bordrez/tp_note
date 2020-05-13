@@ -15,10 +15,10 @@ if ($resultat) {
         $_SESSION['username'] = $resultat['username'];
         $_SESSION['status'] = $resultat['status'];
         header('Location: ../index.php');
-        exit;
+        exit();
     }
 }
 // echo 'Mauvais identifiant ou mot de passe !';
 header("Location: ../login.php");
-exit;
+exit();
 ?>

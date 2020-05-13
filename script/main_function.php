@@ -3,10 +3,44 @@
 session_start();
 
 function isConnected() {
-    if (!isset($_SESSION['username'])) {
-        return False;
+    if (isset($_SESSION['username'])) {
+        return True;
     }
-    return True;
+    return False;
+}
+
+function isConnectedRedirect($page = 'index.php') {
+    /**
+     * Fonction de bidouillage pour corriger le warning : Cannot modify header information - headers already sent by
+     * 
+     * Permet de rediriger l'utilisateur connecté sur une autre page passé en paramètre après que le headers soit créé.
+     * 
+    */
+    if (isConnected()) {
+        echo "<script type='text/JavaScript'>
+            alert('Vous ne pouvez pas aller sur cette page en étant connecté !');
+            location.replace('$page'); 
+        </script>
+        ";
+        exit();
+    }
+}
+
+function isNotConnectedRedirect($page = "login.php") {
+    /**
+     * Fonction de bidouillage pour corriger le warning : Cannot modify header information - headers already sent by
+     * 
+     * Permet de rediriger l'utilisateur non connecté sur une autre page passé en paramètre après que le headers soit créé.
+     * 
+    */
+    if (!isConnected()) {
+        echo "<script type='text/JavaScript'>
+        alert('Vous ne pouvez pas aller sur cette page en étant déconnecté !');
+        location.replace('$page'); 
+        </script>
+        ";
+        exit();
+        }
 }
 
 function mysqlConnect() {

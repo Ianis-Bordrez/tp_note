@@ -1,16 +1,14 @@
 <?php
+include_once("header.php");
 
-require_once('script/main_function.php');
+isConnectedRedirect();
+echo "
+    <form action='script/s_login.php' method='post'>
+        <input type='text' name='userName' placeholder=\"Nom d'utilisateur\">
+        <input type='password' name='password' placeholder='Mot de passe'>
+        <button type='submit'>Envoyer</button>
+    </form>
+";
 
-if (isConnected()) {
-    header('Location: index.php');
-    exit;
-}
+include_once("footer.php");
 ?>
-
-<form action="script/s_login.php" method="post">
-<input type="text" name="userName" placeholder="Nom d'utilisateur" />
-<input type="password" name="password" placeholder="Mot de passe" />
-<button type="submit">Envoyer</button>
-</form>
-

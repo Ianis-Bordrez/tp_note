@@ -1,11 +1,7 @@
 <?php
+include_once("header.php");
 
-require_once('script/main_function.php');
-
-if (!isConnected()) {
-    header('Location: login.php');
-    exit;
-}
+isNotConnectedRedirect();
 
 $bdd = mysqlConnect();
 
@@ -19,6 +15,8 @@ if ($resultat) {
     // $password = $resultat[''];
     $firstName = $resultat['firstname'];
     $name = $resultat['name'];
+    $description = $resultat['description'];
+    $job = $resultat['job'];
     $email = $resultat['email'];
     $phone = $resultat['phone'];
     $create_date = $resultat['create_date'];
@@ -28,6 +26,8 @@ if ($resultat) {
                 <h2>$userName</h2>
                 <h2>$firstName</h2>
                 <h2>$name</h2>
+                <h2>$description</h2>
+                <h2>$job</h2>
                 <h2>$email</h2>
                 <h2>$phone</h2>
                 <h2>$create_date</h2>
@@ -41,4 +41,5 @@ if ($resultat) {
     echo "Utilisateur inexistant";
 }
 
+include_once("footer.php");
 ?>
