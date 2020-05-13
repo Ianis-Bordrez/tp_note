@@ -3,7 +3,7 @@
 session_start();
 
 function isConnected() {
-    if (!isset($_SESSION['userName'])) {
+    if (!isset($_SESSION['username'])) {
         return False;
     }
     return True;

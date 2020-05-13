@@ -2,7 +2,7 @@
 
 require_once('main_function.php');
 
-if(!isset($_SESSION['userName'])){
+if(!isConnected()){
     header("Location: ../login.php");
     exit;
 }
@@ -19,7 +19,7 @@ if (empty($_POST['title'] || empty($_POST['content']))) {
     exit;
 }
 
-$req = $bdd->prepare('UPDATE posts SET title=:title, content=:content WHERE id=:pid');
+$req = $bdd->prepare('UPDATE posts SET title=:title, content=:content WHERE post_id=:pid');
 $req->execute(array(
     'title' => $_POST['title'],
     'content' => $_POST['content'],

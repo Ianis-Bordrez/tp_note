@@ -1,28 +1,28 @@
 <?php
-    require_once('script/main_function.php');
+require_once('script/main_function.php');
 
-    $pid = $_GET['pid'];
 
-    if (isConnected()) {
-        header('Location: index.php');
-        exit;
-    }
+if (!isConnected()) {
+    header('Location: login.php');
+    exit;
+}
 
-    if(!isset($_GET['pid'])) {
-        header("Location: ../home.php");
-        exit;
-    }
+$pid = $_GET['pid'];
+
+if(!isset($pid)) {
+    header("Location: ../home.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <body>
-
     <?php
     $bdd = mysqlConnect();
 
-    $req1 = $bdd->prepare('SELECT * FROM posts WHERE id=:pid');
+    $req1 = $bdd->prepare('SELECT * FROM posts WHERE post_id=:pid');
     $req1->execute(array(
         'pid' => $pid
     ));

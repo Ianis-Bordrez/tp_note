@@ -8,5 +8,5 @@ if (!isConnected()) {
 }
 ?>
 <form action="script/s_logout.php" method="post">
-<button type="submit">D'econnexion</button>
+<button type="submit">Déconnexion</button>
 </form>

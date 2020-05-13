@@ -3,17 +3,16 @@ require_once('main_function.php');
 
 $bdd = mysqlConnect();
 
-$req = $bdd->prepare('SELECT id, userName, password, status FROM account WHERE userName = :userName');
+$req = $bdd->prepare('SELECT account_id, username, password, status FROM account WHERE username = :username');
 $req->execute(array(
-    'userName' => $_POST['userName']));
+    'username' => $_POST['userName']));
 $resultat = $req->fetch();
 
-$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
-
 if ($resultat) {
+    $isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
     if ($isPasswordCorrect) {
-        $_SESSION['id'] = $resultat['id'];
-        $_SESSION['userName'] = $resultat['userName'];
+        $_SESSION['account_id'] = $resultat['account_id'];
+        $_SESSION['username'] = $resultat['username'];
         $_SESSION['status'] = $resultat['status'];
         header('Location: ../index.php');
         exit;
