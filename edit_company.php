@@ -24,8 +24,8 @@ echo "
     <form action='script/s_edit_company.php?pid=$company_id' method='post'>
         <input placeholder='Nom' name='name' type='text' value='$name'><br>
         <textarea placeholder='Courte descritption' name='description' type='text'>$description</textarea><br>
-        <textarea placeholder='Nombre de personnels' name='nbrPersonnals' type='text'>$member</textarea><br>
-        <textarea placeholder=\"Domaine d'activit'e\" name='activityArea' type='text'>$activity_area</textarea><br>
+        <input placeholder='Nombre de personnels' name='nbrPersonnals' type='text' value='$member'><br>
+        <input placeholder='\"Domaine d'activit'e\"' name='activityArea' type='text' value='$activity_area'><br>
         <input name='submit' type='submit' value='Modifier'>
     </form>
 ";

@@ -27,6 +27,10 @@ if (!isConnected()) {
         'status' => $_POST['status']
         ));
 }
-header('Location: index.php');
+if ($_POST['status'] == 'ENTREPRISE'){
+    header('Location: company.php');
+} else {
+    header('Location: index.php');
+}
 exit();
 ?>

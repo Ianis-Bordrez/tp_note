@@ -25,7 +25,7 @@ CREATE TABLE offer (
 );
 
 CREATE TABLE company (
-    compagny_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    company_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     boss_id INT(11) NOT NULL REFERENCES account(account_id),
     name VARCHAR(30) NOT NULL,
     description LONGTEXT NULL,

@@ -10,6 +10,18 @@ if ($_SESSION['status'] != "ENTREPRISE") {
     exit();
 }
 
+$bdd = mysqlConnect();
+$req = $bdd->prepare('SELECT company_id FROM company WHERE boss_id = :id');
+$req->execute(array('id' => $_SESSION['account_id']));
+$company = $req->fetch();
+
+if ($company) {
+    ?><script> location.replace("index.php"); </script>
+    <?php
+    // header('Location: index.php');
+    exit();
+}
+
 echo "
     <form action='script/s_company.php' method='post'>
         <input placeholder='Nom' name='name' type='text'><br>

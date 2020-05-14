@@ -36,6 +36,36 @@ if ($acc_info) {
             </div>
         </div>
     ";
+
+    if ($acc_info['status'] == 'ENTREPRISE') {
+        $req2 = $bdd->prepare('SELECT * FROM company where boss_id=:id');
+        $req2->execute(array("id"=>$_SESSION['account_id']));
+        $comp_info = $req2->fetch();
+
+        if ($comp_info){
+            $comp_name = $comp_info['name'];
+            $comp_desc = $comp_info['description'];
+            $comp_memb = $comp_info['member'];
+            $comp_activity = $comp_info['activity_area'];
+
+            echo "
+            <div>
+                <div>
+                    <h2>$comp_name</h2>
+                    <p>$comp_desc</p>
+                    <p>$comp_memb</p>
+                    <p>$comp_activity</p>
+                </div>
+                <div>
+                    <a href='edit_company.php'>Modifier</a>
+                </div>
+            </div>
+            ";
+        } else {
+            echo "Vous n'avez pas créer votre entreprise.";
+            echo "<a href='company.php'>Créer</a>";
+        } 
+    }
 } else {
     echo "Utilisateur inexistant";
 }

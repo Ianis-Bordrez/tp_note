@@ -9,7 +9,7 @@ if (isConnected()) {
 
     $bdd = mysqlConnect();
 
-    $req = $bdd->prepare('DELETE FROM posts WHERE post_id=:id');
+    $req = $bdd->prepare('DELETE FROM offer WHERE offer_id=:id');
     $req->execute(array(
     'id' => $_GET['pid']
     ));

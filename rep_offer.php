@@ -38,8 +38,8 @@ echo "
     ";
 
 echo "
-    <form action='script/s_rep_offer.php' method='post'>
-        <textarea placeholder='Votre réponse' name='content' type='text'></textarea><br>
+    <form action='script/s_rep_offer.php?pid=$pid' method='post'>
+        <textarea placeholder='Votre réponse' name='response' type='text'></textarea><br>
         <input name='submit' type='submit' value='Répondre'>
     </form>    
     ";

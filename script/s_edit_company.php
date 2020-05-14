@@ -25,6 +25,6 @@ if (isConnected()) {
         ));
 }
 
-header("Location: ../index.php");
+header("Location: ../profile.php");
 exit();
 ?>

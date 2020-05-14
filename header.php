@@ -18,15 +18,18 @@ require_once('script/main_function.php');
             <nav>
                 <ul>
                     <li><a href="index.php">Accueil</a></li>
-                    <li><a href="offer.php">Offres</a></li>
+                    <li><a href="offer.php">Liste des offres</a></li>
                     <?php
                     if (isConnected()){
                         if ($_SESSION['status'] == 'CANDIDAT') {
                             echo "<li><a href='profile.php'>Mon profil</a></li>";
+                            echo "<li><a href='response.php'>Mes réponses</a></li>";
                         } elseif ($_SESSION['status'] == 'ENTREPRISE') {
+                            echo "<li><a href='profile.php'>Mon profil</a></li>";
                             echo "<li><a href='new_offer.php'>Poster une offre</a></li>";
                         } elseif ($_SESSION['status'] == 'ADMIN') {
-                            
+                            echo "<li><a href='profile.php'>Tous les profils</a></li>";
+                            echo "<li><a href='profile.php'>Toutes les offres</a></li>";
                         }
                     }
                     ?>
