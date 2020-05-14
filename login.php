@@ -2,6 +2,7 @@
 include_once("header.php");
 
 isConnectedRedirect();
+
 echo "
     <form action='script/s_login.php' method='post'>
         <input type='text' name='userName' placeholder=\"Nom d'utilisateur\">

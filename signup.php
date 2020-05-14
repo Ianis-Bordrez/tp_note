@@ -7,7 +7,7 @@ isConnectedRedirect();
 
 echo "
     <form action='script/s_signup.php' method='post'><br>
-        <input type='text' name='userName' placeholder='Nom d'utilisateur'><br>
+        <input type='text' name='userName' placeholder=\"Nom d'utilisateur\"><br>
         <input type='password' name='password' placeholder='Mot de passe'><br>
         <input type='text' name='name' placeholder='Nom'><br>
         <input type='text' name='firstName' placeholder='Prénom'><br>
