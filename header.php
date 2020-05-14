@@ -22,7 +22,7 @@ require_once('script/main_function.php');
                     <?php
                     if (isConnected()){
                         if ($_SESSION['status'] == 'CANDIDAT') {
-                            echo "<li><a href='profile.php'>Mon profile</a></li>";
+                            echo "<li><a href='profile.php'>Mon profil</a></li>";
                         } elseif ($_SESSION['status'] == 'ENTREPRISE') {
                             echo "<li><a href='new_offer.php'>Poster une offre</a></li>";
                         } elseif ($_SESSION['status'] == 'ADMIN') {

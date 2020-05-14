@@ -15,22 +15,25 @@ if(!isset($pid)) {
 
 $bdd = mysqlConnect();
 
-$req1 = $bdd->prepare('SELECT * FROM offer WHERE offer_id=:pid');
-$req1->execute(array(
-    'pid' => $pid
-));
-$resultat = $req1->fetch();
+$req = $bdd->prepare('SELECT * FROM offer WHERE offer_id=:pid');
+$req->execute(array('pid' => $pid));
+$offer_info = $req->fetch();
 
-$title = $resultat['title'];
-$content = $resultat['content'];
+if ($offer_info) {
+    $title = $offer_info['title'];
+    $content = $offer_info['content'];
 
-echo "
-    <form action='script/s_edit_offer.php?pid=$pid' method='post'>
-        <input placeholder='Titre' name='title' type='text' value='$title'><br>
-        <textarea placeholder='Contenu' name='content' type='text'>$content</textarea><br>
-        <input name='submit' type='submit' value='Modifier'>
-    </form>
-";
+    echo "
+        <form action='script/s_edit_offer.php?pid=$pid' method='post'>
+            <input placeholder='Titre' name='title' type='text' value='$title'><br>
+            <textarea placeholder='Contenu' name='content' type='text'>$content</textarea><br>
+            <input name='submit' type='submit' value='Modifier'>
+        </form>
+    ";
+} else {
+    echo "L'offre n'a pas été trouvée.";
+}
+
 
 include_once("footer.php");
 ?>

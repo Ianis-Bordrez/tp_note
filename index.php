@@ -3,9 +3,9 @@ include_once("header.php");
 
 $bdd = mysqlConnect();
 
-$req1 = $bdd->prepare('SELECT * FROM offer ORDER BY offer_id DESC');
-$req1->execute();
-$offers = $req1->fetchall();
+$req = $bdd->prepare('SELECT * FROM offer ORDER BY offer_id DESC');
+$req->execute();
+$offers = $req->fetchall();
 
 if ($offers) {
     foreach($offers as $offer){
@@ -20,14 +20,21 @@ if ($offers) {
             </div>";
 
         if (isConnected()){
-            if ($_SESSION['account_id'] == $offer['account_id'] || $_SESSION['status'] == "ADMIN") {
+            if ($_SESSION['account_id'] == $offer['account_id'] || $_SESSION['status'] == 'ADMIN') {
                 $id = $offer['offer_id'];
                 echo "
                     <div>
-                        <a href='script/del_offer.php?pid=$id'>Suppr</a>
-                        <a href='edit_offer.php?pid=$id'>Modif</a>
+                        <a href='script/del_offer.php?pid=$id'>Supprimer</a>
+                        <a href='edit_offer.php?pid=$id'>Modifer</a>
                     </div>
                     ";
+            } else if ($_SESSION['status'] == 'CANDIDAT') {
+                $id = $offer['offer_id'];
+                echo "
+                <div>
+                    <a href='rep_offer.php?pid=$id'>Répondre</a>
+                </div>
+                ";
             }
         }
         echo "<hr>";

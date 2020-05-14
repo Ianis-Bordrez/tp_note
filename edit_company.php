@@ -5,9 +5,9 @@ isNotConnectedRedirect();
 
 $bdd = mysqlConnect();
 
-$req1 = $bdd->prepare('SELECT * FROM company WHERE boss_id=:pid');
-$req1->execute(array('pid' => $_SESSION['account_id']));
-$resultat = $req1->fetch();
+$req = $bdd->prepare('SELECT * FROM company WHERE boss_id=:pid');
+$req->execute(array('pid' => $_SESSION['account_id']));
+$resultat = $req->fetch();
 
 if (!$resultat){
     header('Location: index.php');

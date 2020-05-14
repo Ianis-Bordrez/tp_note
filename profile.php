@@ -5,21 +5,20 @@ isNotConnectedRedirect();
 
 $bdd = mysqlConnect();
 
-$req1 = $bdd->prepare('SELECT * FROM account where account_id=:id');
-$req1->execute(array("id"=>$_SESSION['account_id']));
-$resultat = $req1->fetch();
+$req = $bdd->prepare('SELECT * FROM account where account_id=:id');
+$req->execute(array("id"=>$_SESSION['account_id']));
+$acc_info = $req->fetch();
 
-if ($resultat) {
-    $id = $resultat['account_id'];
-    $userName = $resultat['username'];
-    // $password = $resultat[''];
-    $firstName = $resultat['firstname'];
-    $name = $resultat['name'];
-    $description = $resultat['description'];
-    $job = $resultat['job'];
-    $email = $resultat['email'];
-    $phone = $resultat['phone'];
-    $create_date = $resultat['create_date'];
+if ($acc_info) {
+    $id = $acc_info['account_id'];
+    $userName = $acc_info['username'];
+    $firstName = $acc_info['firstname'];
+    $name = $acc_info['name'];
+    $description = $acc_info['description'];
+    $job = $acc_info['job'];
+    $email = $acc_info['email'];
+    $phone = $acc_info['phone'];
+    $create_date = $acc_info['create_date'];
     echo "
         <div>
             <div>
@@ -33,7 +32,7 @@ if ($resultat) {
                 <h2>$create_date</h2>
             </div>
             <div>
-            <a href='edit_profile.php?pid=$id'>Modifier</a>
+            <a href='edit_profile.php'>Modifier</a>
             </div>
         </div>
     ";
