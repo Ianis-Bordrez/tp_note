@@ -3,9 +3,9 @@ include_once("header.php");
 
 isNotConnectedRedirect();
 
-$pid = $_GET['pid'];
+$pid = $_POST['oid'];
 
-if(!isset($pid)) {
+if(!isset($oid)) {
     ?><script> location.replace("index.php"); </script>
     <?php
     // header('Location: index.php');
@@ -14,8 +14,8 @@ if(!isset($pid)) {
 
 $bdd = mysqlConnect();
 
-$req = $bdd->prepare('SELECT * FROM offer WHERE offer_id=:pid');
-$req->execute(array('pid' => $pid));
+$req = $bdd->prepare('SELECT * FROM offer WHERE offer_id=:oid');
+$req->execute(array('oid' => $oid));
 $offer_info = $req->fetch();
 
 if (!$offer_info) {
@@ -38,7 +38,7 @@ echo "
     ";
 
 echo "
-    <form action='script/s_rep_offer.php?pid=$pid' method='post'>
+    <form action='script/s_rep_offer.php?pid=$oid' method='post'>
         <textarea placeholder='Votre réponse' name='response' type='text'></textarea><br>
         <input name='submit' type='submit' value='Répondre'>
     </form>    

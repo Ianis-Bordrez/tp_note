@@ -37,7 +37,9 @@ if ($offers) {
                 $id = $offer['offer_id'];
                 echo "
                 <div>
-                    <a href='rep_offer.php?pid=$id'>Répondre</a>
+                    <form action='rep_offer.php' method='post'>
+                        <button type='submit' name='oid' value='$oid'>Répondre</button>
+                    </form>
                 </div>
                 ";
             }
