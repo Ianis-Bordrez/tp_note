@@ -4,9 +4,9 @@ include_once("header.php");
 
 isNotConnectedRedirect();
 
-$pid = $_GET['pid'];
+$oid = $_POST['oid'];
 
-if(!isset($pid)) {
+if(!isset($oid)) {
     ?><script> location.replace("index.php"); </script>
     <?php
     // header('Location: index.php');
@@ -16,7 +16,7 @@ if(!isset($pid)) {
 $bdd = mysqlConnect();
 
 $req = $bdd->prepare('SELECT * FROM offer WHERE offer_id=:pid');
-$req->execute(array('pid' => $pid));
+$req->execute(array('pid' => $oid));
 $offer_info = $req->fetch();
 
 if ($offer_info) {
@@ -24,11 +24,11 @@ if ($offer_info) {
     $content = $offer_info['content'];
 
     echo "
-        <form action='script/s_edit_offer.php?pid=$pid' method='post'>
+        <form action='script/s_edit_offer.php' method='post'>
             <input placeholder='Titre' name='title' type='text' value='$title'><br>
             <textarea placeholder='Contenu' name='content' type='text'>$content</textarea><br>
-            <input name='submit' type='submit' value='Modifier'>
-        </form>
+            <button type='submit' name='oid' value='$oid'>Modifier</button>
+            </form>
     ";
 } else {
     echo "L'offre n'a pas été trouvée.";

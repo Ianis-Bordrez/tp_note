@@ -28,9 +28,9 @@ if (!isConnected()) {
         ));
 }
 if ($_POST['status'] == 'ENTREPRISE'){
-    header('Location: company.php');
+    header('Location: ../company.php');
 } else {
-    header('Location: index.php');
+    header('Location: ../login.php');
 }
 exit();
 ?>

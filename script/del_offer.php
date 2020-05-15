@@ -2,16 +2,16 @@
 require_once('main_function.php');
 
 if (isConnected()) {
-    if(!isset($_GET['pid'])) {
+    if(!isset($_POST['oid'])) {
         header("Location: ../index.php");
     exit();
     }
 
     $bdd = mysqlConnect();
 
-    $req = $bdd->prepare('DELETE FROM offer WHERE offer_id=:id');
+    $req = $bdd->prepare('DELETE FROM offer WHERE offer_id=:oid');
     $req->execute(array(
-    'id' => $_GET['pid']
+    'oid' => $_POST['oid']
     ));
 }
 

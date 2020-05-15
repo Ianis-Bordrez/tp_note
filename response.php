@@ -6,6 +6,7 @@ isNotConnectedRedirect();
 $bdd = mysqlConnect();
 
 $req = $bdd->prepare('SELECT * FROM offer_response WHERE account_id=:account_id ORDER BY resp_id DESC');
+
 $req->execute(array('account_id'=> $_SESSION['account_id']));
 $responses = $req->fetchall();
 if ($responses) {
@@ -26,7 +27,7 @@ if ($responses) {
 
             echo "
                 <div> 
-                    <h2>L'offre</h2>
+                    <h2>Offre :</h2>
                     <p>$title</p>
                     <p>$content</p>
                     <p>$offer_date</p>

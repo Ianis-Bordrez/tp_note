@@ -5,11 +5,17 @@ isNotConnectedRedirect();
 
 $bdd = mysqlConnect();
 
+if (isset($_POST['pid'])){
+    $pid = $_POST['pid'];
+} else {
+    $pid = $_SESSION['account_id'];
+}
+
 $req = $bdd->prepare('SELECT * FROM account WHERE account_id=:pid');
-$req->execute(array('pid' => $_SESSION['account_id']));
+$req->execute(array('pid' => $pid));
 $acc_info = $req->fetch();
 
-$id = $acc_info['account_id'];
+$pid = $acc_info['account_id'];
 $userName = $acc_info['username'];
 // $password = $resultat[''];
 $firstName = $acc_info['firstname'];
@@ -29,7 +35,7 @@ echo "
         <input placeholder='Travail' name='job' type='text' value='$job'><br>
         <input placeholder='Email' name='email' type='text' value='$email'><br>
         <input placeholder='Téléphone' name='phone' type='text' value='$phone'><br>
-        <input name='submit' type='submit' value='Modifier'>
+        <button type='submit' name='pid' value='$pid'>Modifier</button>
     </form>
 ";
 

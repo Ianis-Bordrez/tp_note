@@ -21,12 +21,17 @@ if ($offers) {
 
         if (isConnected()){
             if ($_SESSION['account_id'] == $offer['account_id'] || $_SESSION['status'] == 'ADMIN') {
-                $id = $offer['offer_id'];
+                $oid = $offer['offer_id'];
                 echo "
                     <div>
-                        <a href='script/del_offer.php?pid=$id'>Supprimer</a>
-                        <a href='edit_offer.php?pid=$id'>Modifer</a>
+                        <form action='script/del_offer.php' method='post'>
+                            <button type='submit' name='oid' value='$oid'>Supprimer</button>
+                        </form>
+                        <form action='edit_offer.php' method='post'>
+                            <button type='submit' name='oid' value='$oid'>Modifier</button>
+                        </form>
                     </div>
+                    
                     ";
             } else if ($_SESSION['status'] == 'CANDIDAT') {
                 $id = $offer['offer_id'];
