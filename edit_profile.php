@@ -28,15 +28,47 @@ $phone = $acc_info['phone'];
 // $status = $acc_info['status'];
 
 echo "
-    <form action='script/s_edit_profile.php' method='post'>
-        <input placeholder='Prénom' name='firstName' type='text' value='$firstName'><br>
-        <input placeholder='Nom' name='name' type='text' value='$name'><br>
-        <textarea placeholder='Courte description' name='description' type='text'>$description</textarea><br>
-        <input placeholder='Travail' name='job' type='text' value='$job'><br>
-        <input placeholder='Email' name='email' type='text' value='$email'><br>
-        <input placeholder='Téléphone' name='phone' type='text' value='$phone'><br>
-        <button type='submit' name='pid' value='$pid'>Modifier</button>
-    </form>
+<div class='row center'>
+    <div class='col s6 offset-s3'>
+        <div class='card blue-grey darken-1'>
+            <span class='card-title'>Veuillez vous inscrire</span>
+            <div class='card-action'>
+                <form action='script/s_edit_profile.php' method='post'>
+                <div class='row'>
+                    <div class='input-field col s6'>
+                        <input id='name' name='name' type='text' class='validate' value='$name'>
+                        <label for='name'>Nom</label>
+                    </div>
+                    <div class='input-field col s6'>
+                        <input id='firstName' name='firstName' type='text' class='validate' value='$firstName'>
+                        <label for='firstName'>Prénom</label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='input-field col s6'>
+                        <input id='email' name='email' type='text' class='validate' value='$email'>
+                        <label for='email'>Adresse Email</label>
+                    </div>
+                    <div class='input-field col s6'>
+                        <input id='phone' name='phone' type='tel' class='validate' maxlength='10' value='$phone'>
+                        <label for='phone'>Numéro de téléphone</label>
+                    </div>
+                </div>
+                <div class='input-field'>
+                        <input id='job' name='job' type='text' class='validate' value='$job'>
+                        <label for='job'>Travail actuel</label>
+                    </div>
+                <div class='input-field'>
+                    <textarea id='description' name='description' class='materialize-textarea'>$description</textarea>
+                    <label for='description'>Courte description de vous</label>
+                </div>
+                    <button class='btn waves-effect waves-light' type='submit' value='$pid'>Modifier</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
 ";
 
 include_once("footer.php");

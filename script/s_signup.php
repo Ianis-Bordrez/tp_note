@@ -1,6 +1,11 @@
 <?php 
 require_once('main_function.php');
 
+if(empty($_POST['userName']) || empty($_POST['password']) || empty($_POST['firstName']) || empty($_POST['name']) || empty($_POST['email']) || empty($_POST['phone']) || empty($_POST['status'])){
+    header('Location: ../signup.php');
+    exit();
+}
+
 if (!isConnected()) {
     $bdd = mysqlConnect();
 
@@ -27,10 +32,7 @@ if (!isConnected()) {
         'status' => $_POST['status']
         ));
 }
-if ($_POST['status'] == 'ENTREPRISE'){
-    header('Location: ../company.php');
-} else {
-    header('Location: ../login.php');
-}
+
+header('Location: ../login.php');
 exit();
 ?>

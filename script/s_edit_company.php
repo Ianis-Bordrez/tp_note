@@ -21,7 +21,7 @@ if (isConnected()) {
         'description' => $_POST['description'],
         'nbrPersonnals' => $_POST['nbrPersonnals'],
         'activityArea' => $_POST['activityArea'],
-        'pid' => $_POST['cid']
+        'cid' => $_POST['cid']
         ));
 }
 

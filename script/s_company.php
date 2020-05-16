@@ -1,6 +1,11 @@
 <?php
 require_once('main_function.php');
 
+if(empty($_POST['name']) || empty($_POST['description']) || empty($_POST['nbrPersonnals']) || empty($_POST['activityArea'])) {
+    header("Location: ../company.php");
+    exit();
+}
+
 if (isConnected()) {
     $bdd = mysqlConnect();
 
@@ -13,5 +18,6 @@ if (isConnected()) {
         'activity_area' => $_POST['activityArea'],
         ));
 }
+
 header("Location: ../profile.php");
 exit();

@@ -1,6 +1,11 @@
 <?php
 require_once('main_function.php');
 
+if (empty($_POST['title']) || empty($_POST['content'])) {
+    header('Location: ../new_offer.php');
+    exit();
+}
+
 if (isConnected()) {
     $bdd = mysqlConnect();
 

@@ -23,13 +23,37 @@ if ($company) {
 }
 
 echo "
-    <form action='script/s_company.php' method='post'>
-        <input placeholder='Nom' name='name' type='text'><br>
-        <textarea placeholder='Description' name='description' type='text'></textarea><br>
-        <input placeholder='Nombre de personnels' name='nbrPersonnals' type='text'><br>
-        <input placeholder=\"Domaine d'activité\" name='activityArea' type='text'><br>
-        <input name='submit' type='submit' value='Créer'>
-    </form>
+<div class='row center'>
+    <div class='col s6 offset-s3'>
+        <div class='card blue-grey darken-1'>
+            <span class='card-title'>Votre entreprise</span>
+            <div class='card-action'>
+                <form action='script/s_company.php' method='post'>
+                    <div class='input-field'>
+                        <input id='name' name='name' type='text' class='validate'>
+                        <label for='name'>Nom de l'entreprise</label>
+                    </div class='input-field'>
+                    <div class='input-field'>
+                        <textarea id='description' name='description' class='materialize-textarea'></textarea>
+                        <label for='description'>Description de l'entreprise</label>
+                    </div class='input-field'>
+                    <div class='row'>
+                        <div class='input-field col s3'>
+                            <input id='nbrPersonnals' name='nbrPersonnals' type='text' class='validate'>
+                            <label for='nbrPersonnals'>Nombre de personnels</label>
+                        </div class='input-field'>
+                        <div class='input-field col s9'>
+                            <input id='activityArea' name='activityArea' type='text' class='validate'>
+                            <label for='activityArea'>Domaine d'activité</label>
+                        </div class='input-field'>
+                    <div class='row'>
+                    <button class='btn waves-effect waves-light' type='submit'>Créer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
 ";
 
 include_once("footer.php");

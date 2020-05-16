@@ -33,11 +33,19 @@ CREATE TABLE company (
     activity_area VARCHAR(30) NULL
 );
 
-CREATE TABLE offer_response (
-    resp_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE offer_answer (
+    answ_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     offer_id INT(11) NOT NULL REFERENCES offer(offer_id),
     account_id INT(11) NOT NULL REFERENCES account(account_id),
-    response LONGTEXT NOT NULL,
-    response_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    answer LONGTEXT NOT NULL,
+    answer_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE answer_answer (
+    answ_answ_id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    answ_id INT(11) NOT NULL REFERENCES offer(offer_id),
+    account_id INT(11) NOT NULL REFERENCES account(account_id),
+    answer LONGTEXT NOT NULL,
+    isAccepted BOOLEAN NOT NULL,
+    answer_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

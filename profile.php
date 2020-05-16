@@ -20,19 +20,23 @@ if ($acc_info) {
     $phone = $acc_info['phone'];
     $create_date = $acc_info['create_date'];
     echo "
-        <div>
-            <div>
-                <h2>$userName</h2>
-                <h2>$firstName</h2>
-                <h2>$name</h2>
-                <h2>$description</h2>
-                <h2>$job</h2>
-                <h2>$email</h2>
-                <h2>$phone</h2>
-                <h2>$create_date</h2>
-            </div>
-            <div>
-            <a href='edit_profile.php'>Modifier</a>
+    <div class='row'>
+        <div class='col s4 offset-s1'>
+            <div class='card blue-grey darken-1'>
+                <div class='card-content white-text'>
+                    <span class='card-title'>Votre profil</span>
+                    <blockquote>Nom d'utilisateur : $userName</blockquote>
+                    <blockquote>Prénom : $firstName</blockquote>
+                    <blockquote>Nom : $name</blockquote>
+                    <blockquote>Déscirption : $description</blockquote>
+                    <blockquote>Travail : $job</blockquote>
+                    <blockquote>Email : $email</blockquote>
+                    <blockquote>Numéro de téléphone : $phone</blockquote>
+                    <blockquote>Date de création du compte : $create_date</blockquote>
+                    <form action='edit_profile.php' method='post'>
+                        <button class='btn waves-effect waves-light' type='submit'>Modifier</button>
+                    </form>
+                </div>
             </div>
         </div>
     ";
@@ -48,23 +52,36 @@ if ($acc_info) {
             $comp_memb = $comp_info['member'];
             $comp_activity = $comp_info['activity_area'];
 
-            echo "
-            <div>
-                <div>
-                    <h2>$comp_name</h2>
-                    <p>$comp_desc</p>
-                    <p>$comp_memb</p>
-                    <p>$comp_activity</p>
-                </div>
-                <div>
-                    <a href='edit_company.php'>Modifier</a>
-                </div>
+    echo "
+        <div class='col s4 offset-s2'>
+            <div class='card blue-grey darken-1'>
+                <div class='card-content white-text'>
+                    <span class='card-title'>Votre entreprise</span>
+                    <blockquote>Nom : $comp_name</blockquote>
+                    <blockquote>Description : $comp_desc</blockquote>
+                    <blockquote>Nombre de membre : $comp_memb</blockquote>
+                    <blockquote>Domaine d'activité : $comp_activity</blockquote>
+                <form action='edit_company.php' method='post'>
+                    <button class='btn waves-effect waves-light' type='submit'>Modifier</button>
+                </form>
             </div>
-            ";
+        </div>
+    </div>
+    ";
         } else {
-            echo "Vous n'avez pas créer votre entreprise.";
-            echo "<a href='company.php'>Créer</a>";
-        } 
+    echo "
+        <div class='col s4 offset-s2'>
+            <div class='card blue-grey darken-1'>
+                <div class='card-content white-text'>
+                    <span class='card-title'>Vous n'avez pas créer votre entreprise</span>
+                <form action='company.php' method='post'>
+                    <button class='btn waves-effect waves-light' type='submit'>Créer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    ";
+} 
     }
 } else {
     echo "Utilisateur inexistant";
