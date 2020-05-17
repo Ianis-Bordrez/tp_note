@@ -27,6 +27,7 @@ if ($answers) {
             $req5->execute(array('offer_owner_id'=> $offer['account_id']));
             $offer_owner_info = $req5->fetch();
 
+            $offer_owner_id = $offer_owner_info['account_id'];
             $offer_owner_username = $offer_owner_info['username'];
 
             $answ_text = $answer['answer'];
@@ -42,7 +43,7 @@ if ($answers) {
                             echo "<div class='card-content white-text'>";
                         }
                         echo "
-                                <p>Offre de $offer_owner_username<p>
+                                <p>Offre de <a href='profile.php?pid=$offer_owner_id'>$offer_owner_username</a><p>
                                 <span class='card-title'>$title</span>
                                 <blockquote>$content</blockquote>
                                 <p>$offer_date</p>

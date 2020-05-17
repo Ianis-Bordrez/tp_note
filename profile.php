@@ -74,7 +74,7 @@ if ($acc_info) {
         </div>
     ";
 
-    if ($acc_info['status'] == 'ENTREPRISE') {
+    if ($_SESSION['status'] == 'ENTREPRISE') {
         $req2 = $bdd->prepare('SELECT * FROM company where boss_id=:id');
         $req2->execute(array("id"=> $pid));
         $comp_info = $req2->fetch();
