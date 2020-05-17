@@ -6,12 +6,17 @@ isNotConnectedRedirect();
 $bdd = mysqlConnect();
 
 $pid = $_SESSION['account_id'];
-$canModify = true; 
+$canModify = true;
+$canModify2 = false;
 
 if (isset($_GET['pid']))
 {
     $pid = $_GET['pid'];
     $canModify = false;
+}
+
+if ($_SESSION['status'] == "ENTREPRISE" || $_SESSION['status'] == "ADMIN"){
+    $canModify2 = true;
 }
 
 
@@ -74,7 +79,7 @@ if ($acc_info) {
         </div>
     ";
 
-    if ($_SESSION['status'] == 'ENTREPRISE') {
+    if ($acc_info['status'] == 'ENTREPRISE') {
         $req2 = $bdd->prepare('SELECT * FROM company where boss_id=:id');
         $req2->execute(array("id"=> $pid));
         $comp_info = $req2->fetch();
@@ -95,7 +100,7 @@ if ($acc_info) {
                     <blockquote>Description : $comp_desc</blockquote>
                     <blockquote>Nombre de membre : $comp_memb</blockquote>
                     <blockquote>Domaine d'activité : $comp_activity</blockquote>";
-                if($canModify  || $_SESSION['status'] == "ADMIN") {
+                if($canModify2 || $_SESSION['status'] == "ADMIN") {
                     echo "
                 <form action='edit_company.php' method='post'>
                     <button class='btn waves-effect waves-light' type='submit' name='cid' value='$cid'>Modifier</button>
@@ -113,7 +118,7 @@ if ($acc_info) {
                 <div class='card-content white-text'>
                     <span class='card-title'>Vous n'avez pas créer votre entreprise</span>
                 <form action='company.php' method='post'>
-                    <button class='btn waves-effect waves-light' type='submit' name='cid' value='$cid'>Créer</button>
+                    <button class='btn waves-effect waves-light' type='submit'>Créer</button>
                 </form>
             </div>
         </div>
