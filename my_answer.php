@@ -12,6 +12,7 @@ if ($answers) {
     foreach($answers as $answer){
         $offer_id = $answer['offer_id'];
         $rid = $answer['answ_id'];
+        $isAccepted = $answer['isAccepted'];
 
         $req2 = $bdd->prepare('SELECT * FROM offer WHERE offer_id=:offer_id');
         $req2->execute(array('offer_id'=> $offer_id));
@@ -30,12 +31,17 @@ if ($answers) {
 
             $answ_text = $answer['answer'];
             $answ_date = $answer['answer_date'];
-
             echo "
                 <div class='row'>
-                    <div class='col s12 m6'>
-                        <div class='card blue-grey darken-1'>
-                            <div class='card-content white-text'>
+                    <div class='col s12 m6 '>
+                        <div class='card blue-grey darken-1'>";
+                        if ($isAccepted){
+                            echo "<div class='card-content white-text blink-bg'>";
+                        }
+                        else {
+                            echo "<div class='card-content white-text'>";
+                        }
+                        echo "
                                 <p>Offre de $offer_owner_username<p>
                                 <span class='card-title'>$title</span>
                                 <blockquote>$content</blockquote>

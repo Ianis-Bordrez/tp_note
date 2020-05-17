@@ -30,8 +30,9 @@ if (isConnected()) {
             'account_id' => $_SESSION['account_id'],
             'answer' => $_POST['answer'],
             ));
+    
         $req2 = $bdd->prepare('UPDATE offer_answer SET isAccepted=:isAccepted WHERE answ_id=:id');
-        $req->execute(array(
+        $req2->execute(array(
             'id' => $id,
             'isAccepted' => $_POST['yes_or_no']
         ));
