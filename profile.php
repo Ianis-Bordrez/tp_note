@@ -14,6 +14,7 @@ if (isset($_GET['pid']))
     $canModify = false;
 }
 
+
 $req = $bdd->prepare('SELECT * FROM account where account_id=:id');
 $req->execute(array("id"=> $pid));
 $acc_info = $req->fetch();
@@ -60,10 +61,10 @@ if ($acc_info) {
                         ";
                     }
                     
-                    if($canModify) {
+                    if($canModify || $_SESSION['status'] == "ADMIN") {
                     echo "
                     <form action='edit_profile.php' method='post'>
-                        <button class='btn waves-effect waves-light' type='submit'>Modifier</button>
+                        <button class='btn waves-effect waves-light' type='submit' name='pid' value='$pid'>Modifier</button>
                     </form>
                     ";
                     }
@@ -79,6 +80,7 @@ if ($acc_info) {
         $comp_info = $req2->fetch();
 
         if ($comp_info){
+            $cid = $comp_info['company_id'];
             $comp_name = $comp_info['name'];
             $comp_desc = $comp_info['description'];
             $comp_memb = $comp_info['member'];
@@ -93,10 +95,10 @@ if ($acc_info) {
                     <blockquote>Description : $comp_desc</blockquote>
                     <blockquote>Nombre de membre : $comp_memb</blockquote>
                     <blockquote>Domaine d'activité : $comp_activity</blockquote>";
-                if($canModify) {
+                if($canModify  || $_SESSION['status'] == "ADMIN") {
                     echo "
                 <form action='edit_company.php' method='post'>
-                    <button class='btn waves-effect waves-light' type='submit'>Modifier</button>
+                    <button class='btn waves-effect waves-light' type='submit' name='cid' value='$cid'>Modifier</button>
                 </form>";
                 }
                 echo"
@@ -111,7 +113,7 @@ if ($acc_info) {
                 <div class='card-content white-text'>
                     <span class='card-title'>Vous n'avez pas créer votre entreprise</span>
                 <form action='company.php' method='post'>
-                    <button class='btn waves-effect waves-light' type='submit'>Créer</button>
+                    <button class='btn waves-effect waves-light' type='submit' name='cid' value='$cid'>Créer</button>
                 </form>
             </div>
         </div>
