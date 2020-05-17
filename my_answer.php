@@ -36,7 +36,7 @@ if ($answers) {
                     <div class='col s12 m6 '>
                         <div class='card blue-grey darken-1'>";
                         if ($isAccepted){
-                            echo "<div class='card-content white-text blink-bg'>";
+                            echo "<div class='card-content white-text blink-bg'>"; // Ce petit blinking qui fait plaisir
                         }
                         else {
                             echo "<div class='card-content white-text'>";
