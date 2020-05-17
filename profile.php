@@ -5,8 +5,17 @@ isNotConnectedRedirect();
 
 $bdd = mysqlConnect();
 
+$pid = $_SESSION['account_id'];
+$canModify = true; 
+
+if (isset($_GET['pid']))
+{
+    $pid = $_GET['pid'];
+    $canModify = false;
+}
+
 $req = $bdd->prepare('SELECT * FROM account where account_id=:id');
-$req->execute(array("id"=>$_SESSION['account_id']));
+$req->execute(array("id"=> $pid));
 $acc_info = $req->fetch();
 
 if ($acc_info) {
@@ -24,7 +33,7 @@ if ($acc_info) {
         <div class='col s4 offset-s1'>
             <div class='card blue-grey darken-1'>
                 <div class='card-content white-text'>
-                    <span class='card-title'>Votre profil</span>
+                    <span class='card-title'>Profil</span>
                     <blockquote>Nom d'utilisateur : $userName</blockquote>
                     <blockquote>Prénom : $firstName</blockquote>
                     <blockquote>Nom : $name</blockquote>
@@ -33,9 +42,32 @@ if ($acc_info) {
                     <blockquote>Email : $email</blockquote>
                     <blockquote>Numéro de téléphone : $phone</blockquote>
                     <blockquote>Date de création du compte : $create_date</blockquote>
+                    ";
+                    
+                    $folder = strtolower($firstName."_".$name);
+                    $destination = "cv/$folder/cv.pdf";
+                    
+
+                    if(file_exists($destination)){
+                    echo "
+                        <form action='script/show_cv.php' method='post' >
+                        <button class='btn waves-effect waves-light' type='submit' name='pid' value='$pid'>Voir le CV</button>
+                        </form>
+                    ";
+                    } else {
+                        echo"
+                            <blockquote>Aucun CV</blockquote>
+                        ";
+                    }
+                    
+                    if($canModify) {
+                    echo "
                     <form action='edit_profile.php' method='post'>
                         <button class='btn waves-effect waves-light' type='submit'>Modifier</button>
                     </form>
+                    ";
+                    }
+                    echo "
                 </div>
             </div>
         </div>
@@ -43,7 +75,7 @@ if ($acc_info) {
 
     if ($acc_info['status'] == 'ENTREPRISE') {
         $req2 = $bdd->prepare('SELECT * FROM company where boss_id=:id');
-        $req2->execute(array("id"=>$_SESSION['account_id']));
+        $req2->execute(array("id"=> $pid));
         $comp_info = $req2->fetch();
 
         if ($comp_info){
@@ -56,14 +88,18 @@ if ($acc_info) {
         <div class='col s4 offset-s2'>
             <div class='card blue-grey darken-1'>
                 <div class='card-content white-text'>
-                    <span class='card-title'>Votre entreprise</span>
+                    <span class='card-title'>Entreprise</span>
                     <blockquote>Nom : $comp_name</blockquote>
                     <blockquote>Description : $comp_desc</blockquote>
                     <blockquote>Nombre de membre : $comp_memb</blockquote>
-                    <blockquote>Domaine d'activité : $comp_activity</blockquote>
+                    <blockquote>Domaine d'activité : $comp_activity</blockquote>";
+                if($canModify) {
+                    echo "
                 <form action='edit_company.php' method='post'>
                     <button class='btn waves-effect waves-light' type='submit'>Modifier</button>
-                </form>
+                </form>";
+                }
+                echo"
             </div>
         </div>
     </div>

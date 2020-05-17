@@ -42,6 +42,13 @@ if ($offers) {
                     ";
             } else if ($_SESSION['status'] == 'CANDIDAT') {
                 $oid = $offer['offer_id'];
+                $req2 = $bdd->prepare('SELECT * FROM offer_answer WHERE offer_id=:offer_id AND account_id=:account_id');
+                $req2->execute(array(
+                    'offer_id'=> $oid,
+                    'account_id'=> $_SESSION['account_id']
+                ));
+                $answer_info = $req2->fetch();
+                if (!$answer_info) {
                 echo "
                         <div>
                             <form action='rep_offer.php' method='post'>
@@ -51,6 +58,7 @@ if ($offers) {
                             </form>
                         </div>
                     ";
+                }
             }
         }
         echo"

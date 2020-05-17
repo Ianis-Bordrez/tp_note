@@ -24,7 +24,7 @@ if ($offer_info) {
     $content = $offer_info['content'];
 
     echo "
-    <div class='row center'>
+<div class='row center'>
     <div class='col s4 offset-s4'>
         <div class='card blue-grey darken-1'>
             <span class='card-title'>Modifier votre offre</span>
@@ -32,7 +32,7 @@ if ($offer_info) {
                 <form action='script/s_edit_offer.php' method='post'>
                     <div class='input-field'>
                         <input id='title' name='title' type='text' class='validate' value='$title'>
-                        <label for='title'>Title de l'offre</label>
+                        <label for='title'>Titre de l'offre</label>
                     </div>
                     <div class='input-field'>
                         <textarea id='contenu' name='content' class='materialize-textarea'>$content</textarea>

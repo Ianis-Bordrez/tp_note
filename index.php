@@ -12,11 +12,20 @@ if ($offers) {
         $title = $offer['title'];
         $content = $offer['content'];
         $date = $offer['offer_date'];
+
+        $req3 = $bdd->prepare('SELECT account_id,username FROM account WHERE account_id=:offer_owner_id');
+        $req3->execute(array('offer_owner_id'=> $offer['account_id']));
+        $offer_owner_info = $req3->fetch();
+
+        $offer_owner_username = $offer_owner_info['username'];
+        $offer_owner_id = $offer_owner_info['account_id'];
+
         echo "
             <div class='row'>
                 <div class='col s12 m6'>
                     <div class='card blue-grey darken-1'>
                         <div class='card-content white-text'>
+                            <p>Offre de <a href='profile.php?pid=$offer_owner_id'>$offer_owner_username</a></p>
                             <span class='card-title'>$title</span>
                             <blockquote>$content</blockquote>
                             <p>$date</p>
@@ -42,7 +51,14 @@ if ($offers) {
                     ";
             } else if ($_SESSION['status'] == 'CANDIDAT') {
                 $oid = $offer['offer_id'];
-                echo "
+                $req2 = $bdd->prepare('SELECT * FROM offer_answer WHERE offer_id=:offer_id AND account_id=:account_id');
+                $req2->execute(array(
+                    'offer_id'=> $oid,
+                    'account_id'=> $_SESSION['account_id']
+                ));
+                $answer_info = $req2->fetch();
+                if (!$answer_info) {
+                    echo "
                         <div>
                             <form action='rep_offer.php' method='post'>
                             <button class='btn waves-effect waves-light' type='submit' name='oid' value='$oid'>Répondre
@@ -51,6 +67,7 @@ if ($offers) {
                             </form>
                         </div>
                     ";
+                }
             }
         }
         echo"

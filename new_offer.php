@@ -12,7 +12,7 @@ echo "
                     <form action='script/s_new_offer.php' method='post'>
                         <div class='input-field'>
                             <input id='title' name='title' type='text' class='validate'>
-                            <label for='title'>Title de l'offre</label>
+                            <label for='title'>Titre de l'offre</label>
                         </div>
                         <div class='input-field'>
                             <textarea id='contenu' name='content' class='materialize-textarea'></textarea>

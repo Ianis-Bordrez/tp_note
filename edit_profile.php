@@ -31,7 +31,7 @@ echo "
 <div class='row center'>
     <div class='col s6 offset-s3'>
         <div class='card blue-grey darken-1'>
-            <span class='card-title'>Veuillez vous inscrire</span>
+            <span class='card-title'>Modification du profil</span>
             <div class='card-action'>
                 <form action='script/s_edit_profile.php' method='post'>
                 <div class='row'>
@@ -54,16 +54,32 @@ echo "
                         <label for='phone'>Numéro de téléphone</label>
                     </div>
                 </div>
-                <div class='input-field'>
+                <div class='row'>
+                    <div class='input-field'>
                         <input id='job' name='job' type='text' class='validate' value='$job'>
                         <label for='job'>Travail actuel</label>
                     </div>
+                </div>
                 <div class='input-field'>
                     <textarea id='description' name='description' class='materialize-textarea'>$description</textarea>
                     <label for='description'>Courte description de vous</label>
                 </div>
-                    <button class='btn waves-effect waves-light' type='submit' value='$pid'>Modifier</button>
+                    <button class='btn waves-effect waves-light' type='submit' name='pid' value='$pid'>Modifier</button>
                 </form>
+                <div class = 'card-panel blue-grey'>
+                <form action='script/upload_cv.php' method='post' enctype='multipart/form-data'>
+                    <div class='file-field input-field'>
+                        <div class='btn'>
+                            <span>File</span>
+                            <input type='file' name='cv' id='cv'>
+                        </div>
+                        <div class='file-path-wrapper'>
+                            <input class='file-path validate' type='text' placeholder='Envoyez votre CV format PDF'>
+                        </div>
+                    </div>
+                    <button class='btn waves-effect waves-light' type='submit' name='pid' value='$pid'>Envoyer</button>
+                </form>
+                </div>
             </div>
         </div>
     </div>

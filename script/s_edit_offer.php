@@ -2,7 +2,7 @@
 
 require_once('main_function.php');
 
-isNotConnectedRedirect("../login.php");
+isNotConnectedRedirect();
 
 
 if(!isset($_POST['oid'])) {
@@ -10,8 +10,8 @@ if(!isset($_POST['oid'])) {
     exit();
 }
 
-if (empty($_POST['title'] || empty($_POST['content']))) {
-    header("Location: ../index.php");
+if (empty($_POST['title']) || empty($_POST['content'])) {
+    header("Location: ../my_offer.php");
     exit();
 }
 

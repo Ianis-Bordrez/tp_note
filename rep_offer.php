@@ -3,6 +3,8 @@ include_once("header.php");
 
 isNotConnectedRedirect();
 
+$rid = null;
+
 if (isset($_POST['oid'])){
     $oid = $_POST['oid'];
 }
@@ -43,20 +45,22 @@ echo "
                     <blockquote>$content</blockquote>
                     <p>$offer_date</p>";
 
-                    if ($answ_info){
-                    $answ_text = $answ_info['answer'];
-                    $answ_date = $answ_info['answer_date'];
-                    $req3 = $bdd->prepare('SELECT account_id,username FROM account WHERE account_id=:answ_owner_id');
-                    $req3->execute(array('answ_owner_id'=> $answ_owner_id));
-                    $answ_owner_info = $req3->fetch();
-                    $answ_owner_username = $answ_owner_info['username'];
-                    echo "
-                    <div class = 'card-panel blue-grey'>
-                        <p>Réponse de $answ_owner_username<p>
-                        <blockquote class='blue-grey'>$answ_text</blockquote>
-                        <p>$answ_date</p>
-                    </div>
-                    ";
+                    if ($rid) {
+                        if ($answ_info){
+                            $answ_text = $answ_info['answer'];
+                            $answ_date = $answ_info['answer_date'];
+                            $req3 = $bdd->prepare('SELECT account_id,username FROM account WHERE account_id=:answ_owner_id');
+                            $req3->execute(array('answ_owner_id'=> $answ_owner_id));
+                            $answ_owner_info = $req3->fetch();
+                            $answ_owner_username = $answ_owner_info['username'];
+                            echo "
+                            <div class = 'card-panel blue-grey'>
+                                <p>Réponse de $answ_owner_username<p>
+                                <blockquote class='blue-grey'>$answ_text</blockquote>
+                                <p>$answ_date</p>
+                            </div>
+                            ";
+                        }
                     }
                 echo "
                 </div>
@@ -72,7 +76,7 @@ if ($rid){
         <div class='card blue-grey darken-1'>
             <span class='card-title'>Votre réponse</span>
             <div class='card-action'>
-                <form action='script/s_rep_offer.php' method='post'>
+                <form action='script/s_answ_offer.php' method='post'>
                 <div class='row'>
                     <textarea placeholder='Votre réponse' name='answer' type='text'></textarea>
                 </div class='row'>
@@ -82,19 +86,19 @@ if ($rid){
                         <div class='input-field inline'>
                             <p>
                                 <label>
-                                    <input name='yes_or_no' value='YES' type='radio' />
+                                    <input name='yes_or_no' value='1' type='radio' />
                                     <span>Favorable</span>
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input name='yes_or_no' value='NO' type='radio' />
+                                    <input name='yes_or_no' value='0' type='radio' />
                                     <span>Défavorable</span>
                                 </label>
                             </p>
                         </div>
                     </div> 
-                </div class='row'
+                </div class='row'>
                     <button class='btn waves-effect waves-light' type='submit' name='rid' value='$rid'>Répondre</button>
                 </form>
             </div>
@@ -105,10 +109,22 @@ if ($rid){
 
 } else {
     echo "
-    <form action='script/s_rep_offer.php' method='post'>
-        <textarea placeholder='Votre réponse' name='answer' type='text'></textarea>
-        <button class='btn waves-effect waves-light' type='submit' name='oid' value='$oid'>Répondre</button>
-    </form>    
+    <div class='row center'>
+        <div class='col s4 offset-s4'>
+            <div class='card blue-grey darken-1'>
+                <span class='card-title'>Votre réponse</span>
+                <div class='card-action'>
+                    <form action='script/s_answ_offer.php' method='post'>
+                        <div class='input-field'>
+                            <textarea id='answer' name='answer' class='materialize-textarea'></textarea>
+                            <label for='answer'>Entrez votre réponse à l'offre</label>
+                        </div>
+                        <button class='btn waves-effect waves-light' type='submit' name='oid' value='$oid'>Répondre</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     ";
 
 }
