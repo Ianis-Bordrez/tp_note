@@ -65,7 +65,7 @@ if ($offers) {
                                 $answer_answer = $req4->fetch();
 
                                 if(!$answer_answer){
-                                    echo "<form action='rep_offer.php' method='post'>
+                                    echo "<form action='answ_offer.php.php' method='post'>
                                     <button class='btn waves-effect waves-light' type='submit' name='rid' value='$rid'>Répondre
                                         <i class='material-icons right'>send</i>
                                     </button>

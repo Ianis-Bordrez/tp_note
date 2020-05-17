@@ -23,7 +23,6 @@ require_once('script/main_function.php');
             <div class="nav-wrapper">
               <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="index.php">Accueil</a></li>
-                <li><a href="all_offer.php">Toutes les offres</a></li>
                 <?php
                   if (isConnected()){
                     echo "<li><a href='profile.php'>Mon profil</a></li>";

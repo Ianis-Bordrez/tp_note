@@ -60,7 +60,7 @@ if ($offers) {
                 if (!$answer_info) {
                     echo "
                         <div>
-                            <form action='rep_offer.php' method='post'>
+                            <form action='answ_offer.php.php' method='post'>
                             <button class='btn waves-effect waves-light' type='submit' name='oid' value='$oid'>Répondre
                                 <i class='material-icons right'>send</i>
                             </button>

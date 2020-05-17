@@ -38,6 +38,7 @@ CREATE TABLE offer_answer (
     offer_id INT(11) NOT NULL REFERENCES offer(offer_id),
     account_id INT(11) NOT NULL REFERENCES account(account_id),
     answer LONGTEXT NOT NULL,
+    isAccepted BOOLEAN NOT NULL,
     answer_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -46,6 +47,5 @@ CREATE TABLE answer_answer (
     answ_id INT(11) NOT NULL REFERENCES offer(offer_id),
     account_id INT(11) NOT NULL REFERENCES account(account_id),
     answer LONGTEXT NOT NULL,
-    isAccepted BOOLEAN NOT NULL,
     answer_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

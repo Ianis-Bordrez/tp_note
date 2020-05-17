@@ -23,14 +23,18 @@ if(empty($_POST['answer'])){
 if (isConnected()) {
     $bdd = mysqlConnect();
     if ($rid){
-        $req = $bdd->prepare('INSERT INTO answer_answer (answ_id, account_id, answer, isAccepted) VALUES (:id, :account_id, :answer, :isAccepted)');
+        $req = $bdd->prepare('INSERT INTO answer_answer (answ_id, account_id, answer) VALUES (:id, :account_id, :answer)');
         $id = $rid;
         $req->execute(array(
             'id' => $id,
             'account_id' => $_SESSION['account_id'],
             'answer' => $_POST['answer'],
-            'isAccepted' => $_POST['yes_or_no']
             ));
+        $req2 = $bdd->prepare('UPDATE offer_answer SET isAccepted=:isAccepted WHERE answ_id=:id');
+        $req->execute(array(
+            'id' => $id,
+            'isAccepted' => $_POST['yes_or_no']
+        ));
 
     } else {
         $req = $bdd->prepare('INSERT INTO offer_answer (offer_id, account_id, answer) VALUES (:id, :account_id, :answer)');
